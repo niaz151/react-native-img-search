@@ -13,6 +13,7 @@ function ImageList(){
 
   return( 
     <FlatList
+      showsVerticalScrollIndicator={false}
       numColumns={2}
       horizontal={false}
       contentContainerStyle={styles.listStyles}
@@ -36,10 +37,11 @@ const styles = StyleSheet.create({
    alignItems: 'center',
    justifyContent: 'space-between',
    paddingBottom: hp("10%"),
+   marginTop:hp("1%")
   },  
   imgStyles: {
-    width: 120,
-    height: 100,
+    width: wp("30%"),
+    height: hp("10%"),
     margin: wp("5%")
   }
 })
