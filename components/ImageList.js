@@ -8,7 +8,7 @@ function ImageList(){
   const images = useSelector( state => state['image_data']['all_images']);
 
   function handleImgPress(){
-    
+
   }
 
   return( 
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
    borderColor:'black',
    display: 'flex',
    alignItems: 'center',
-   justifyContent: 'space-between'
+   justifyContent: 'space-between',
+   paddingBottom: hp("10%"),
   },  
   imgStyles: {
     width: 120,
