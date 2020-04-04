@@ -1,12 +1,13 @@
-import React from 'react';
-import {View,Text, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {View,Text, StyleSheet, Dimensions, Platform} from 'react-native';
 
 function Home(){
+   
   return(
-    <View>
-      <Text> Home </Text> 
+    <View style={styles.container}>
+      <Text> hi </Text> 
     </View>
-  )
+  ) 
 }
 
 const styles = StyleSheet.create({
@@ -19,3 +20,4 @@ const styles = StyleSheet.create({
 })
 
 export default Home;
+
