@@ -1,28 +1,46 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, StyleSheet, TextInput } from 'react-native';
 import {Icon, Button} from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import { bindActionCreators } from 'redux';
 import {useSelector, useDispatch} from 'react-redux';
-import {updateSearchQuery} from '../redux/actions/index';
 
 function Home(){
 
   const search_query = useSelector(state => state['search_query']);
   const dispatch = useDispatch();
- 
+
+  const URL = 'https://pixabay.com/api/';
+  const API_KEY = '15890560-8a70823bcdf077266eac5013e';
+  
   function onTextChange(text){
     dispatch({
       type:'UPDATE_SEARCH_QUERY',
       payload:text
+    });
+  }
+
+  function onSubmit(){
+    var endpoint = URL + `?key=${API_KEY}` + `&q=${search_query}`;
+    fetch(endpoint)
+    .then((response) => {
+      return response.json();
     })
+    .then((data) => {
+      var images = data['hits'].map( (item) => {
+        return item['previewURL']
+      })
+      dispatch({
+        type:'UPDATE_ALL_IMAGES',
+        payload: images
+      })
+    });
   }
 
   return(
     <View style={styles.container}>
       <View style={styles.textInputContainer}>
         <TextInput style={styles.textArea} onChangeText={ text => onTextChange(text)} /> 
-        <Button icon={<Icon name='search' size={15} color='white'/>} buttonStyle={styles.btnStyles} color="#000"/>
+        <Button icon={<Icon name='search' size={15} color='white'/>} buttonStyle={styles.btnStyles} onPress={() => onSubmit()} color="#000"/>
       </View>
     </View>
   ) 

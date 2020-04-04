@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
 import Home from './components/Home';
-import reducers from './redux/reducers';
+import reducers from './reducers';
 
 const Stack = createStackNavigator();
 const store = createStore(reducers);
