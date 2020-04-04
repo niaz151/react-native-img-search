@@ -5,3 +5,9 @@ export const changeOrientation = (orientation) => {
   })
 }
 
+export const updateSearchQuery = (query) => {
+  return({
+    type:'UPDATE_SEARCH_QUERY',
+    payload: query
+  })
+}

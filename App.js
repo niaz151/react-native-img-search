@@ -15,7 +15,15 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" options={{title:'Home Page'}} component={Home} />
+          <Stack.Screen 
+            name="Home" 
+            component={Home}
+            options={{
+              title:'Home Page',
+              headerStyle:{backgroundColor: '#0B6AB0'},
+              headerTitleStyle:{color:'white'}
+            }} 
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
