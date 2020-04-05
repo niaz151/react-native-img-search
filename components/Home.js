@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, StyleSheet, TextInput, Image, FlatList } from 'react-native';
-import {Icon, Button} from 'react-native-elements';
+import {View, StyleSheet, TextInput} from 'react-native';
+import {Icon, Button, SearchBar} from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {useSelector, useDispatch} from 'react-redux';
 import ImageList from './ImageList';
@@ -16,12 +16,8 @@ function Home(){
   const URL = 'https://pixabay.com/api/';
   const API_KEY = '15890560-8a70823bcdf077266eac5013e';
   
-  function onTextChange(text){
-    dispatch({
-      type:'UPDATE_SEARCH_QUERY',
-      payload:text
-    });
-  }
+  /*
+
 
   function onSubmit(){
     // FETCH ALL IMG DATA
@@ -47,12 +43,26 @@ function Home(){
       })
     });
   }
+  */
+
+ function handleSearchQuery(text){
+    dispatch({
+      type:'UPDATE_SEARCH_QUERY',
+      payload:text
+    });
+  }
 
   return(
     <View style={styles.container}>
       <View style={styles.textInputContainer}>
-        <TextInput style={styles.textArea} onChangeText={ text => onTextChange(text)} /> 
-        <Button icon={<Icon name='search' size={15} color='white'/>} buttonStyle={styles.btnStyles} onPress={() => onSubmit()} color="#000"/>
+      <SearchBar
+        containerStyle={styles.searchBar}
+        inputContainerStyle={styles.searchBarInput}
+        placeholder={'Search'}
+        onChangeText={ (text) => handleSearchQuery(text)}
+        value={search_query}
+      />
+      {/*<Button icon={<Icon name='search' size={15} color='white'/>} buttonStyle={styles.btnStyles} onPress={() => onSubmit()} color="#000"/>*/} 
       </View>
       <View>
         <ImageList/>
@@ -66,24 +76,28 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingTop: hp("5%")
+    paddingTop: hp("5%"),
+    backgroundColor:'#CED6E3'
   },
   textInputContainer: {
-    width:wp("90%"),
+    width:wp("80%"),
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent:'center'
   },
-  textArea: {
-    height: hp("5%"),
-    width: wp("68%"),
-    borderBottomWidth: 1,
-    borderColor:'black',
+  searchBar: {
+    width: wp("80%"),
+    height:hp("5%"),
+    backgroundColor:'white',
+    borderRadius: 18,
+    borderBottomColor:'transparent',
+    borderTopColor:'transparent'
   },
-  btnStyles:{
-    backgroundColor: '#0B6AB0',
-    marginLeft:wp("2%"),
-    width:wp("20%"),
-  }
+  searchBarInput:{
+    height: 30,
+    backgroundColor:'white',
+    marginTop:-2,
+  }, 
 })
 
 export default Home;

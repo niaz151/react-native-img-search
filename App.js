@@ -21,7 +21,7 @@ export default function App() {
             component={Home}
             options={{
               title:'Home',
-              headerStyle:{backgroundColor: '#0B6AB0'},
+              headerStyle:{backgroundColor: '#7BABED'},
               headerTitleStyle:{color:'white'}
             }} 
           />
@@ -30,7 +30,7 @@ export default function App() {
             component={ImagePage}
             options={{
               title:'Image Details',
-              headerStyle:{backgroundColor: '#0B6AB0'},
+              headerStyle:{backgroundColor: '#7BABED'},
               headerTitleStyle:{color:'white'}
             }}
           />
@@ -39,12 +39,3 @@ export default function App() {
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
