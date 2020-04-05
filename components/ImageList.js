@@ -1,17 +1,40 @@
 import React from 'react';
 import {FlatList, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {useNavigation} from '@react-navigation/native';
 
 function ImageList(){
 
+  // REDUX HOOKS
   const images = useSelector( state => state['image_data']['all_images']);
+  const dispatch = useDispatch();
 
-  function handleImgPress(){
+  // NAVIGATION HOOK
+  const navigation = useNavigation();
 
+  // API INFO
+  const URL = 'https://pixabay.com/api/';
+  const API_KEY = '15890560-8a70823bcdf077266eac5013e';
+
+
+  function handleImgClick(img_id){
+    var endpoint = URL + `?key=${API_KEY}` + `&id=${img_id}`;
+    fetch(endpoint)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      var img_data = data['hits']
+      dispatch({
+        type:'FETCH_IMAGE_DETAILS',
+        payload:img_data
+      })
+    });
+    navigation.navigate('Image_Details')
   }
 
-  return( 
+  return(
     <FlatList
       showsVerticalScrollIndicator={false}
       numColumns={2}
@@ -19,7 +42,7 @@ function ImageList(){
       contentContainerStyle={styles.listStyles}
       data = {images}
       renderItem = { image =>  
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleImgClick(image['item']['id'])} >
           <Image 
             style={styles.imgStyles} 
             source={{uri:`${image['item']['url']}`}} 

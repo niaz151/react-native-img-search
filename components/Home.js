@@ -39,7 +39,7 @@ function Home(){
         }
       })
       dispatch({
-        type:'UPDATE_ALL_IMAGES',
+        type:'FETCH_ALL_IMAGES',
         payload: images
       })
     });

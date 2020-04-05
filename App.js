@@ -4,8 +4,9 @@ import { StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
-import Home from './components/Home';
 import reducers from './reducers';
+import Home from './components/Home';
+import ImagePage from './components/ImagePage';
 
 const Stack = createStackNavigator();
 const store = createStore(reducers);
@@ -16,13 +17,22 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen 
-            name="Home" 
+            name='Home'
             component={Home}
             options={{
-              title:'Home Page',
+              title:'Home',
               headerStyle:{backgroundColor: '#0B6AB0'},
               headerTitleStyle:{color:'white'}
             }} 
+          />
+          <Stack.Screen
+            name='Image_Details'
+            component={ImagePage}
+            options={{
+              title:'Image Details',
+              headerStyle:{backgroundColor: '#0B6AB0'},
+              headerTitleStyle:{color:'white'}
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
