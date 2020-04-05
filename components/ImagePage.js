@@ -7,6 +7,7 @@ function ImagePage({navigation}){
 
   // EXTRACT ALL DATA FROM IMG JSON DATA
   const single_img_data = useSelector(state => state['image_data']['single_image'][0]);
+  console.log(single_img_data)
   const img_url = single_img_data['largeImageURL'];
   const img_likes = single_img_data['likes'];
   const img_tags = single_img_data['tags'];
