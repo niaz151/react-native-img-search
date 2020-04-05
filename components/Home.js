@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
-import {Icon, Button, SearchBar} from 'react-native-elements';
+import {SearchBar} from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {useSelector, useDispatch} from 'react-redux';
 import ImageList from './ImageList';
@@ -15,19 +15,24 @@ function Home(){
   // API INFO
   const URL = 'https://pixabay.com/api/';
   const API_KEY = '15890560-8a70823bcdf077266eac5013e';
-  
-  /*
 
 
-  function onSubmit(){
-    // FETCH ALL IMG DATA
+ function handleSearchQuery(text){
+
+    // SEND UPDATE QUERY ACTION
+    dispatch({
+      type:'UPDATE_SEARCH_QUERY',
+      payload:text
+    });
+
+    // FETCH ALL DATA FOR SINGLE IMG
     var endpoint = URL + `?key=${API_KEY}` + `&q=${search_query}`;
     fetch(endpoint)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      // EXTRACT ALL RELEVANT IMG DATA
+      // EXTRACT ALL RELEVANT SINGLE IMG DATA
       var images = data['hits'].map( (item) => {
         return {
           'id':item['id'], 
@@ -43,14 +48,6 @@ function Home(){
       })
     });
   }
-  */
-
- function handleSearchQuery(text){
-    dispatch({
-      type:'UPDATE_SEARCH_QUERY',
-      payload:text
-    });
-  }
 
   return(
     <View style={styles.container}>
@@ -62,7 +59,6 @@ function Home(){
         onChangeText={ (text) => handleSearchQuery(text)}
         value={search_query}
       />
-      {/*<Button icon={<Icon name='search' size={15} color='white'/>} buttonStyle={styles.btnStyles} onPress={() => onSubmit()} color="#000"/>*/} 
       </View>
       <View>
         <ImageList/>
