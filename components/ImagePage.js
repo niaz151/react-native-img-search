@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
+import {Icon} from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 function ImagePage({navigation}){
@@ -9,21 +10,31 @@ function ImagePage({navigation}){
   // EXTRACT ALL RELEVANT IMG DATA FROM STURE
   const single_img_data = useSelector(state => state['image_data']['single_image'][0]);
   const img_url = single_img_data['largeImageURL'];
-  console.log(img_url)
   const img_likes = single_img_data['likes'];
   const img_tags = single_img_data['tags'];
   const img_downloads = single_img_data['downloads'];
   const img_uploader = single_img_data['user'];
-  
+  const res_height = single_img_data['imageHeight'];
+  const res_width = single_img_data['imageWidth'];
 
   return(
     <View style={styles.container} >
       <View style={styles.imgHeader}>
-        <Text> {img_uploader} </Text>
+        <View style={styles.imgUploaderWrap}>
+          <Icon name='user-circle'type='font-awesome'/>
+          <Text> {img_uploader} </Text>
+        </View>
       </View>
       <Image source={{uri:img_url}} style={styles.imgStyle} />
       <View style={styles.imgFooter}>
-
+        <View style={styles.imgLikesWrap}>
+          <Icon name='thumbs-up'type='font-awesome'/>
+          <Text> {img_downloads} </Text>
+        </View>
+        <View style={styles.imgDownloadsWrap}>
+          <Icon name='download'type='font-awesome'/>
+          <Text> {img_downloads} </Text>
+        </View>
       </View>
     </View>
   )
@@ -38,23 +49,40 @@ const styles = StyleSheet.create({
   imgHeader:{
     height:hp("6%"),
     width: wp("85%"),
-    borderWidth:1,
-    borderColor:'#D4D4D4',
     alignItems:'flex-start',
     justifyContent:'center'
+  },
+  imgUploaderWrap:{
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center',
+    marginLeft:wp("1%"),
+  },
+  imgLikesWrap:{
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'flex-start',
+    marginLeft:wp("1%"),
+  },
+  imgDownloadsWrap:{
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'flex-end',
+    marginRight:wp("1%"),
   },
   imgStyle:{
     height: hp("40%"),
     width: wp("85%"),
-    borderWidth:1,
-    borderColor:'#D4D4D4'
   },
   imgFooter:{
     height:hp("6%"),
     width: wp("85%"),
-    borderWidth:1,
-    borderColor:'#D4D4D4'
+    flexDirection:'row',
   },
 })
+
 
 export default ImagePage;

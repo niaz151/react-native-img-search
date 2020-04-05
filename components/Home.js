@@ -38,7 +38,9 @@ function Home(){
           'id':item['id'], 
           'height': item['previewHeight'],
           'width': item['previewWidth'],
-          'url': item['previewURL']
+          'url': item['previewURL'],
+          'resHeight': item['imageHeight'],
+          'resWidth': item['imageWidth']
         }
       })
       // PUT ALL RELEVANT IMG DATA INTO STORE VIA REDUCER
