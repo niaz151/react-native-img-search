@@ -5,6 +5,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 function ImagePage({navigation}){
 
+  
   // EXTRACT ALL DATA FROM IMG JSON DATA
   const single_img_data = useSelector(state => state['image_data']['single_image'][0]);
   console.log(single_img_data)

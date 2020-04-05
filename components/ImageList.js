@@ -30,8 +30,8 @@ function ImageList(){
         type:'FETCH_IMAGE_DETAILS',
         payload:img_data
       })
+      navigation.navigate('Image_Details')
     });
-    navigation.navigate('Image_Details')
   }
 
   return(
@@ -48,7 +48,7 @@ function ImageList(){
             source={{uri:`${image['item']['url']}`}} 
           />
         </TouchableOpacity>} 
-      keyExtractor = { image => {return image['index']}}
+      key={Math.random()}
     />
   ) 
 }
