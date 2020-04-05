@@ -14,8 +14,8 @@ function ImagePage({navigation}){
   const img_tags = single_img_data['tags'];
   const img_downloads = single_img_data['downloads'];
   const img_uploader = single_img_data['user'];
-  const res_height = single_img_data['imageHeight'];
-  const res_width = single_img_data['imageWidth'];
+  const img_res_height = single_img_data['imageHeight'];
+  const img_res_width = single_img_data['imageWidth'];
 
   return(
     <View style={styles.container} >
@@ -28,12 +28,12 @@ function ImagePage({navigation}){
       <Image source={{uri:img_url}} style={styles.imgStyle} />
       <View style={styles.imgFooter}>
         <View style={styles.imgLikesWrap}>
-          <Icon name='thumbs-up'type='font-awesome'/>
-          <Text> {img_downloads} </Text>
+          <Icon name='hashtag'type='font-awesome'/>
+          <Text> {img_tags} </Text>
         </View>
         <View style={styles.imgDownloadsWrap}>
-          <Icon name='download'type='font-awesome'/>
-          <Text> {img_downloads} </Text>
+          <Icon name='crop' type='font-awesome' />
+          <Text> {img_res_height} x {img_res_width} </Text>
         </View>
       </View>
     </View>
