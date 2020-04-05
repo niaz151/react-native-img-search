@@ -24,12 +24,14 @@ function Home(){
   }
 
   function onSubmit(){
+    // FETCH ALL IMG DATA
     var endpoint = URL + `?key=${API_KEY}` + `&q=${search_query}`;
     fetch(endpoint)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
+      // EXTRACT ALL RELEVANT IMG DATA
       var images = data['hits'].map( (item) => {
         return {
           'id':item['id'], 
@@ -38,16 +40,12 @@ function Home(){
           'url': item['previewURL']
         }
       })
+      // PUT ALL RELEVANT IMG DATA INTO STORE VIA REDUCER
       dispatch({
         type:'FETCH_ALL_IMAGES',
         payload: images
       })
     });
-  }
-
-  function renderImageList(){
-    console.log('i ran');
-    return all_images.length > 0 ? <ImageList/> : null ;
   }
 
   return(
@@ -56,7 +54,7 @@ function Home(){
         <TextInput style={styles.textArea} onChangeText={ text => onTextChange(text)} /> 
         <Button icon={<Icon name='search' size={15} color='white'/>} buttonStyle={styles.btnStyles} onPress={() => onSubmit()} color="#000"/>
       </View>
-      <View style={styles.testContainer} >
+      <View>
         <ImageList/>
       </View>
     </View>
@@ -72,28 +70,14 @@ const styles = StyleSheet.create({
   },
   textInputContainer: {
     width:wp("90%"),
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
-  listContainer:{
-    height: 600,
-    width: wp("100%"),
-    borderWidth: 2,
-    borderColor:'black',
-    display:'flex',
-    alignItems:'center',
-    justifyContent:'center'
-  },  
   textArea: {
     height: hp("5%"),
     width: wp("68%"),
     borderBottomWidth: 1,
     borderColor:'black',
-  },
-  imgStyle: {
-    height: 20,
-    width: 20,
   },
   btnStyles:{
     backgroundColor: '#0B6AB0',

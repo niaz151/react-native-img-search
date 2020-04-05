@@ -18,19 +18,22 @@ function ImageList(){
   const API_KEY = '15890560-8a70823bcdf077266eac5013e';
 
 
-  function handleImgClick(img_id){
+  function handleImgListClick(img_id){
+    // FETCH SINGLE IMAGE DATA
     var endpoint = URL + `?key=${API_KEY}` + `&id=${img_id}`;
     fetch(endpoint)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      var img_data = data['hits']
+      // STORE SINGLE IMG DATA VIA REDUCER
+      var img_data = data['hits'];
       dispatch({
         type:'FETCH_IMAGE_DETAILS',
         payload:img_data
-      })
-      navigation.navigate('Image_Details')
+      });
+      // NAVIGATE TO IMAGE DETAILS SCREEN
+      navigation.navigate('Image_Details');
     });
   }
 
@@ -42,7 +45,7 @@ function ImageList(){
       contentContainerStyle={styles.listStyles}
       data = {images}
       renderItem = { image =>  
-        <TouchableOpacity onPress={() => handleImgClick(image['item']['id'])} >
+        <TouchableOpacity onPress={() => handleImgListClick(image['item']['id'])} >
           <Image 
             style={styles.imgStyles} 
             source={{uri:`${image['item']['url']}`}} 
