@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import {SearchBar} from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {useSelector, useDispatch} from 'react-redux';
@@ -9,7 +9,8 @@ function Home(){
 
   // REDUX HOOKS
   const search_query = useSelector(state => state['search_query']);
-  const all_images = useSelector(state => state['image_data']['all_images'])
+  const all_images = useSelector(state => state['image_data']['all_images']);
+  const screen_orientation = useSelector(state => state['screen_orientation']);
   const dispatch = useDispatch();
 
   // API INFO
@@ -17,7 +18,20 @@ function Home(){
   const API_KEY = '15890560-8a70823bcdf077266eac5013e';
 
 
- function handleSearchQuery(text){
+  // DETECT SCREEN ORIENTATION AND STORE VIA REDUCER
+  const dimensions = Dimensions.get('screen');
+  (dimensions.height > dimensions.width)?
+    dispatch({
+      type:'UPDATE_SCREEN_ORIENTATION',
+      payload:'PORTRAIT'
+    }):
+    dispatch({
+      type:'UPDATE_SCREEN_ORIENTATION',
+      payload:'LANDSCAPE'
+    })
+  
+
+  function handleSearchQuery(text){
 
     // SEND UPDATE QUERY ACTION
     dispatch({
@@ -25,14 +39,15 @@ function Home(){
       payload:text
     });
 
-    // FETCH ALL DATA FOR SINGLE IMG
+    // FETCH DATA FOR ALL IMAGES 
     var endpoint = URL + `?key=${API_KEY}` + `&q=${search_query}`;
     fetch(endpoint)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      // EXTRACT ALL RELEVANT SINGLE IMG DATA
+
+      // EXTRACT ALL RELEVANT IMG DATA
       var images = data['hits'].map( (item) => {
         return {
           'id':item['id'], 
@@ -43,7 +58,8 @@ function Home(){
           'resWidth': item['imageWidth']
         }
       })
-      // PUT ALL RELEVANT IMG DATA INTO STORE VIA REDUCER
+
+      // STORE ALL RELEVANT IMG DATA VIA REDUCER
       dispatch({
         type:'FETCH_ALL_IMAGES',
         payload: images

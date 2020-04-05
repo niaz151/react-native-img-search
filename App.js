@@ -1,8 +1,8 @@
 import React from 'react';
-import {createStore} from 'redux';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Provider } from 'react-redux';
 import reducers from './reducers';
 import Home from './components/Home';
 import ImagePage from './components/ImagePage';
