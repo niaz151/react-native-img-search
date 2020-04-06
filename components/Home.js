@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet, Dimensions, Platform} from 'react-native';
 import {SearchBar} from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {useSelector, useDispatch} from 'react-redux';
@@ -18,7 +18,7 @@ function Home(){
   const API_KEY = '15890560-8a70823bcdf077266eac5013e';
 
 
-  // DETECT SCREEN ORIENTATION AND STORE VIA REDUCER
+  // DETECT INITIAL SCREEN ORIENTATION 
   const dimensions = Dimensions.get('screen');
   (dimensions.height > dimensions.width)?
     dispatch({
@@ -29,7 +29,25 @@ function Home(){
       type:'UPDATE_SCREEN_ORIENTATION',
       payload:'LANDSCAPE'
     })
+
+    // ADD LISTENER FOR ORIENTATION CHANGE
+    Dimensions.addEventListener('change', () => {
+      (dimensions.height > dimensions.width)?
+      dispatch({
+        type:'UPDATE_SCREEN_ORIENTATION',
+        payload:'PORTRAIT'
+      }):
+      dispatch({
+        type:'UPDATE_SCREEN_ORIENTATION',
+        payload:'LANDSCAPE'
+      })
+    })
   
+  
+    function getStyleType(){
+      return screen_orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
+    }
+
 
   function handleSearchQuery(text){
 
@@ -68,39 +86,54 @@ function Home(){
   }
 
   return(
-    <View style={styles.container}>
-      <View style={styles.textInputContainer}>
+    <View style={getStyleType().container} >
       <SearchBar
-        containerStyle={styles.searchBar}
-        inputContainerStyle={styles.searchBarInput}
+        containerStyle={getStyleType().searchBar}
+        inputContainerStyle={portraitStyles.searchBarInput}
         placeholder={'Search'}
         onChangeText={ (text) => handleSearchQuery(text)}
         value={search_query}
       />
-      </View>
       <View>
         <ImageList/>
       </View>
     </View>
   ) 
 }
-
-const styles = StyleSheet.create({
+ 
+const portraitStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingTop: hp("5%"),
+    paddingTop: hp("2%"),
     backgroundColor:'#CED6E3'
-  },
-  textInputContainer: {
-    width:wp("80%"),
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent:'center'
   },
   searchBar: {
     width: wp("80%"),
+    height:hp("5%"),
+    backgroundColor:'white',
+    borderRadius: 18,
+    borderBottomColor:'transparent',
+    borderTopColor:'transparent'
+  },
+  searchBarInput:{
+    height: 30,
+    backgroundColor:'white',
+    marginTop:-2,
+  }, 
+})
+
+const landscapeStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    paddingTop: hp("2%"),
+    backgroundColor:'#CED6E3',
+  },
+  searchBar: {
+    width: wp("150%"),
     height:hp("5%"),
     backgroundColor:'white',
     borderRadius: 18,

@@ -72,4 +72,20 @@ const styles = StyleSheet.create({
   }
 })
 
+const landscapeStyles = StyleSheet.create({
+  listStyles:{
+    borderColor:'black',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: hp("10%"),
+    marginTop:hp("1%")
+   },  
+   imgStyles: {
+     width: wp("30%"),
+     height: hp("10%"),
+     margin: wp("5%")
+   }
+})
+
 export default ImageList;
