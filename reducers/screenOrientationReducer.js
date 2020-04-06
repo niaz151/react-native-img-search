@@ -4,8 +4,7 @@ export default (state = initial_state, action) => {
   switch(action.type){
 
     case 'UPDATE_SCREEN_ORIENTATION':
-      let new_state = state
-      new_state = action.payload;
+      var new_state = action.payload;
       return new_state
 
     default:

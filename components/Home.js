@@ -32,22 +32,25 @@ function Home(){
 
     // ADD LISTENER FOR ORIENTATION CHANGE
     Dimensions.addEventListener('change', () => {
-      (dimensions.height > dimensions.width)?
-      dispatch({
-        type:'UPDATE_SCREEN_ORIENTATION',
-        payload:'PORTRAIT'
-      }):
-      dispatch({
-        type:'UPDATE_SCREEN_ORIENTATION',
-        payload:'LANDSCAPE'
-      })
+      let dimensions = Dimensions.get('screen')
+      if(dimensions.height > dimensions.width){
+        dispatch({
+          type:'UPDATE_SCREEN_ORIENTATION',
+          payload:'PORTRAIT'
+        })
+      }
+      else{
+        dispatch({
+          type:'UPDATE_SCREEN_ORIENTATION',
+          payload:'LANDSCAPE'
+        })
+      }
     })
   
-  
+    // CHOOSE STYLESHEET BASED ON ORIENTATION
     function getStyleType(){
       return screen_orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
     }
-
 
   function handleSearchQuery(text){
 

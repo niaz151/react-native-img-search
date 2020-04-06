@@ -8,6 +8,7 @@ function ImageList(){
 
   // REDUX HOOKS
   const images = useSelector( state => state['image_data']['all_images']);
+  const screen_orientation = useSelector( state => state['screen_orientation']);
   const dispatch = useDispatch();
 
   // NAVIGATION HOOK
@@ -37,23 +38,44 @@ function ImageList(){
     });
   }
 
-  return(
-    <FlatList
-      showsVerticalScrollIndicator={false}
-      numColumns={2}
-      horizontal={false}
-      contentContainerStyle={styles.listStyles}
-      data = {images}
-      renderItem = { image =>  
-        <TouchableOpacity onPress={() => handleImgListClick(image['item']['id'])} >
-          <Image 
-            style={styles.imgStyles} 
-            source={{uri:`${image['item']['url']}`}} 
-          />
-        </TouchableOpacity>} 
-      key={Math.random()}
-    />
-  ) 
+  if(screen_orientation === 'PORTRAIT'){
+    return(
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        numColumns={2}
+        horizontal={false}
+        contentContainerStyle={styles.listStyles}
+        data = {images}
+        renderItem = { image =>  
+          <TouchableOpacity onPress={() => handleImgListClick(image['item']['id'])} >
+            <Image 
+              style={styles.imgStyles} 
+              source={{uri:`${image['item']['url']}`}} 
+            />
+          </TouchableOpacity>} 
+        key={Math.random()}
+      />
+    )
+  }
+  else{
+    return(
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        numColumns={5}
+        horizontal={false}
+        contentContainerStyle={styles.listStyles}
+        data = {images}
+        renderItem = { image =>  
+          <TouchableOpacity onPress={() => handleImgListClick(image['item']['id'])} >
+            <Image 
+              style={styles.imgStyles} 
+              source={{uri:`${image['item']['url']}`}} 
+            />
+          </TouchableOpacity>} 
+        key={Math.random()}
+      />
+    )    
+  }
 }
 
 const styles = StyleSheet.create({ 
@@ -66,8 +88,8 @@ const styles = StyleSheet.create({
    marginTop:hp("1%")
   },  
   imgStyles: {
-    width: wp("30%"),
-    height: hp("10%"),
+    width: wp("32%"),
+    height: hp("11%"),
     margin: wp("5%")
   }
 })
