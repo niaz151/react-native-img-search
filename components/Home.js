@@ -20,7 +20,6 @@ function Home(){
   const URL = 'https://pixabay.com/api/';
   const API_KEY = '15890560-8a70823bcdf077266eac5013e';
 
-
   // DETECT INITIAL SCREEN ORIENTATION 
   const dimensions = Dimensions.get('screen');
   (dimensions.height > dimensions.width)?
@@ -50,7 +49,7 @@ function Home(){
     }
   })
 
-  // CHOOSE STYLESHEET AND HEADER STYLER BASED ON ORIENTATION
+  // CHOOSE STYLESHEET AND HEADER STYLE BASED ON ORIENTATION
   function getStyleType(){
     if(screen_orientation === 'PORTRAIT'){
       // ADJUST HEADER HEIGHT
