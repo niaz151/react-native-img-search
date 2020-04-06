@@ -116,6 +116,7 @@ const landscapeStyles = StyleSheet.create({
     width: wp("100%"),
     alignItems:'flex-start',
     justifyContent:'center',
+    marginTop:hp("-2%")
   },
   imgUploaderWrap:{
     flex:1,

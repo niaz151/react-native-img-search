@@ -51,6 +51,11 @@ function Home(){
     return screen_orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
   }
 
+  // IF EMPTY QUERY, DO NOT SHOW THE DEFAULT API REQUEST IMAGES
+  function isQueryEmpty(){
+    return (search_query === '') ? null : <ImageList/>
+  }
+
   function handleSearchQuery(text){
 
     // SEND UPDATE QUERY ACTION
@@ -60,7 +65,7 @@ function Home(){
     });
 
     // FETCH DATA FOR ALL IMAGES 
-    var endpoint = URL + `?key=${API_KEY}` + `&q=${search_query}`;
+    var endpoint = URL + `?key=${API_KEY}` + `&q=${text}`;
     fetch(endpoint)
     .then((response) => {
       return response.json();
@@ -97,7 +102,7 @@ function Home(){
         value={search_query}
       />
       <View style={getStyleType().listContainer}>
-        <ImageList/>
+        {isQueryEmpty()}
       </View>
     </View>
   ) 

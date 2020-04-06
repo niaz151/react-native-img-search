@@ -9,6 +9,7 @@ function ImageList(){
   // REDUX HOOKS
   const images = useSelector( state => state['image_data']['all_images']);
   const screen_orientation = useSelector( state => state['screen_orientation']);
+  const search_query = useSelector( state => state['search_query']);
   const dispatch = useDispatch();
 
   // NAVIGATION HOOK
@@ -37,58 +38,51 @@ function ImageList(){
       navigation.navigate('Image_Details');
     });
   }
-
-  if(screen_orientation === 'PORTRAIT'){
-
-    // ADJUST HEADER HEIGHT
-    navigation.setOptions({
-      headerStyle:{height:hp("11%"), backgroundColor: '#7BABED'}
-    })
-
-    return(
-      // FLAT LIST WITH 2 COLUMNS, 5 IMAGES PER COLUMN
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        numColumns={2}
-        horizontal={false}
-        contentContainerStyle={styles.listStyles}
-        data = {images}
-        renderItem = { image =>  
-          <TouchableOpacity onPress={() => handleImgListClick(image['item']['id'])} >
-            <Image 
-              style={styles.imgStyles} 
-              source={{uri:`${image['item']['url']}`}} 
-            />
-          </TouchableOpacity>} 
-        key={Math.random()}
-      />
-    )
+ 
+  // CHOOSE STYLESHEET BASED ON ORIENTATION
+  function getStyleType(){
+    if(screen_orientation === 'PORTRAIT'){
+      // ADJUST HEADER HEIGHT
+      navigation.setOptions({
+        headerStyle:{height:hp("11%"), backgroundColor: '#7BABED'}
+      });
+      return 'PORTRAIT';
+    }
+    else{
+      // ADJUST HEADER HEIGHT
+      navigation.setOptions({
+        headerStyle:{height:hp("6%"), backgroundColor: '#7BABED'}
+      });
+      return 'LANDSCAPE';
+    }
   }
-  else{
 
-    // ADJUST HEADER HEIGHT
-    navigation.setOptions({
-      headerStyle:{height:hp("6%"), backgroundColor: '#7BABED'}
-    })
+  return(
+    <FlatList
+      showsVerticalScrollIndicator={false}
+      numColumns={flatListStyles[getStyleType()].num_columns}
+      horizontal={false}
+      contentContainerStyle={styles.listStyles}
+      data = {images}
+      renderItem = { image =>  
+        <TouchableOpacity onPress={() => handleImgListClick(image['item']['id'])} >
+          <Image 
+            style={styles.imgStyles} 
+            source={{uri:`${image['item']['url']}`}} 
+          />
+        </TouchableOpacity>} 
+      key={Math.random()}
+    />
+  )
+}
 
-    return(
-      // FLAT LIST WITH 5 COLUMNS, 2 IMAGES PER COLUMN
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        numColumns={5}
-        horizontal={false}
-        contentContainerStyle={styles.listStyles}
-        data = {images}
-        renderItem = { image =>  
-          <TouchableOpacity onPress={() => handleImgListClick(image['item']['id'])} >
-            <Image 
-              style={styles.imgStyles} 
-              source={{uri:`${image['item']['url']}`}} 
-            />
-          </TouchableOpacity>} 
-        key={Math.random()}
-      />
-    )    
+const flatListStyles = {
+  'PORTRAIT':{
+    num_columns:2,
+  },
+  'LANDSCAPE':{
+    num_columns:5,
+    horizontal:false
   }
 }
 
