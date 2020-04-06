@@ -70,38 +70,49 @@ function Home(){
 
   function handleSearchQuery(text){
 
-    // SEND UPDATE QUERY ACTION
+    // SEND QUERY TO STORE VIA REDUCER
     dispatch({
       type:'UPDATE_SEARCH_QUERY',
       payload:text
     });
 
-    // FETCH DATA FOR ALL IMAGES 
-    var endpoint = URL + `?key=${API_KEY}` + `&q=${text}`;
-    fetch(endpoint)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-
-      // EXTRACT ALL RELEVANT IMG DATA
-      var images = data['hits'].map( (item) => {
-        return {
-          'id':item['id'], 
-          'height': item['previewHeight'],
-          'width': item['previewWidth'],
-          'url': item['previewURL'],
-          'resHeight': item['imageHeight'],
-          'resWidth': item['imageWidth']
-        }
-      })
-
-      // STORE ALL RELEVANT IMG DATA VIA REDUCER
+    // DO NOT FETCH API IMAGES FOR EMPTY QUERY
+    if(text === ''){
       dispatch({
         type:'FETCH_ALL_IMAGES',
-        payload: images
+        payload: []
       })
-    });
+    }
+    
+    // FETCH QUERY RELATED IMAGES  
+    else{
+      // FETCH DATA FOR 20 QUERY RELATED IMAGES 
+      var endpoint = URL + `?key=${API_KEY}` + `&q=${text}`;
+      fetch(endpoint)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+
+        // EXTRACT ALL RELEVANT IMG DATA
+        var images = data['hits'].map( (item) => {
+          return {
+            'id':item['id'], 
+            'height': item['previewHeight'],
+            'width': item['previewWidth'],
+            'url': item['previewURL'],
+            'resHeight': item['imageHeight'],
+            'resWidth': item['imageWidth']
+          }
+        })
+
+        // STORE ALL RELEVANT IMG DATA VIA REDUCER
+        dispatch({
+          type:'FETCH_ALL_IMAGES',
+          payload: images
+        })
+      });
+    }
   }
 
   return(
