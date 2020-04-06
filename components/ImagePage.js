@@ -6,6 +6,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 function ImagePage({navigation}){
 
+  const screen_orientation = useSelector(state => state['screen_orientation']);
   
   // EXTRACT ALL RELEVANT IMG DATA FROM STURE
   const single_img_data = useSelector(state => state['image_data']['single_image'][0]);
@@ -17,21 +18,28 @@ function ImagePage({navigation}){
   const img_res_height = single_img_data['imageHeight'];
   const img_res_width = single_img_data['imageWidth'];
 
+
+  // CHOOSE STYLESHEET BASED ON ORIENTATION
+  function getStyleType(){
+    return screen_orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
+  }
+
+
   return(
-    <View style={styles.container} >
-      <View style={styles.imgHeader}>
-        <View style={styles.imgUploaderWrap}>
+    <View style={getStyleType().container} >
+      <View style={getStyleType().imgHeader}>
+        <View style={getStyleType().imgUploaderWrap}>
           <Icon name='user-circle'type='font-awesome'/>
           <Text> {img_uploader} </Text>
         </View>
       </View>
-      <Image source={{uri:img_url}} style={styles.imgStyle} />
-      <View style={styles.imgFooter}>
-        <View style={styles.imgLikesWrap}>
+      <Image source={{uri:img_url}} style={getStyleType().imgStyle} />
+      <View style={getStyleType().imgFooter}>
+        <View style={getStyleType().imgTagsWrap}>
           <Icon name='hashtag'type='font-awesome'/>
           <Text> {img_tags} </Text>
         </View>
-        <View style={styles.imgDownloadsWrap}>
+        <View style={getStyleType().imgResolutionWrap}>
           <Icon name='crop' type='font-awesome' />
           <Text> {img_res_height} x {img_res_width} </Text>
         </View>
@@ -40,7 +48,7 @@ function ImagePage({navigation}){
   )
 }
 
-const styles = StyleSheet.create({
+const portraitStyles = StyleSheet.create({
   container:{
     flex:1,
     alignItems:'center',
@@ -59,14 +67,14 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     marginLeft:wp("1%"),
   },
-  imgLikesWrap:{
+  imgTagsWrap:{
     flex:1,
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'flex-start',
     marginLeft:wp("1%"),
   },
-  imgDownloadsWrap:{
+  imgResolutionWrap:{
     flex:1,
     flexDirection:'row',
     alignItems:'center',
@@ -74,7 +82,7 @@ const styles = StyleSheet.create({
     marginRight:wp("1%"),
   },
   imgStyle:{
-    height: hp("40%"),
+    height: hp("35%"),
     width: wp("85%"),
   },
   imgFooter:{
@@ -83,6 +91,51 @@ const styles = StyleSheet.create({
     flexDirection:'row',
   },
 })
+
+const landscapeStyles = StyleSheet.create({
+  container:{
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  imgHeader:{
+    height:hp("6%"),
+    width: wp("85%"),
+    alignItems:'flex-start',
+    justifyContent:'center'
+  },
+  imgUploaderWrap:{
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center',
+    marginLeft:wp("1%"),
+  },
+  imgTagsWrap:{
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'flex-start',
+    marginLeft:wp("1%"),
+  },
+  imgResolutionWrap:{
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'flex-end',
+    marginRight:wp("1%"),
+  },
+  imgStyle:{
+    height: hp("25%"),
+    width: wp("100%"),
+  },
+  imgFooter:{
+    height:hp("6%"),
+    width: wp("85%"),
+    flexDirection:'row',
+  },
+})
+
 
 
 export default ImagePage;
