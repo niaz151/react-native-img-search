@@ -11,7 +11,6 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const Stack = createStackNavigator();
 const store = createStore(reducers);
 
-//backgroundColor: '#7BABED'
 export default function App() {
   return (
     <Provider store={store}>
