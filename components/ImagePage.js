@@ -24,10 +24,11 @@ function ImagePage(){
     if (screen_orientation === 'PORTRAIT'){
       // ADJUST HEADER HEIGHT
       navigation.setOptions({
-        headerStyle:{height:hp("10%"), backgroundColor: '#7BABED'}
+        headerStyle:{height:hp("11%"), backgroundColor: '#7BABED'}
       });
       return portraitStyles;
     }
+    
     else{
       // ADJUST HEADER HEIGHT
       navigation.setOptions({

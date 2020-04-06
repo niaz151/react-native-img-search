@@ -23,7 +23,7 @@ export default function App() {
             options={{
               title:'Home',
               headerStyle:{backgroundColor: '#7BABED'},
-              headerTitleStyle:{color:'white'}
+              headerTitleStyle:{color:'white'},
             }} 
           />
           <Stack.Screen
@@ -32,7 +32,10 @@ export default function App() {
             options={{
               title:'Image Details',
               headerStyle:{backgroundColor: '#7BABED'},
-              headerTitleStyle:{color:'white'}
+              headerTitleStyle:{color:'white'},
+              headerTintColor: '#fff',
+              headerBackTitle:'Search',
+              headerBackTitleStyle:{fontSize:14},
             }}
           />
         </Stack.Navigator>

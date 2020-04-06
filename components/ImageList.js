@@ -42,7 +42,7 @@ function ImageList(){
 
     // ADJUST HEADER HEIGHT
     navigation.setOptions({
-      headerStyle:{height:hp("10%"), backgroundColor: '#7BABED'}
+      headerStyle:{height:hp("11%"), backgroundColor: '#7BABED'}
     })
 
     return(
