@@ -92,12 +92,12 @@ function Home(){
     <View style={getStyleType().container} >
       <SearchBar
         containerStyle={getStyleType().searchBar}
-        inputContainerStyle={portraitStyles.searchBarInput}
+        inputContainerStyle={getStyleType().searchBarInput}
         placeholder={'Search'}
         onChangeText={ (text) => handleSearchQuery(text)}
         value={search_query}
       />
-      <View>
+      <View style={getStyleType().listContainer}>
         <ImageList/>
       </View>
     </View>
@@ -111,6 +111,11 @@ const portraitStyles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: hp("2%"),
     backgroundColor:'#CED6E3'
+  },
+  listContainer:{
+    width:wp("90%"),
+    borderColor:'black',
+    borderWidth: 1
   },
   searchBar: {
     width: wp("80%"),
@@ -134,6 +139,10 @@ const landscapeStyles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: hp("2%"),
     backgroundColor:'#CED6E3',
+  },
+  listContainer:{
+    width:wp("200%"),
+    marginRight:wp("5%")
   },
   searchBar: {
     width: wp("150%"),

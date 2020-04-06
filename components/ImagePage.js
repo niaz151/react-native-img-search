@@ -24,7 +24,6 @@ function ImagePage({navigation}){
     return screen_orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
   }
 
-
   return(
     <View style={getStyleType().container} >
       <View style={getStyleType().imgHeader}>
@@ -100,9 +99,9 @@ const landscapeStyles = StyleSheet.create({
   },
   imgHeader:{
     height:hp("6%"),
-    width: wp("85%"),
+    width: wp("100%"),
     alignItems:'flex-start',
-    justifyContent:'center'
+    justifyContent:'center',
   },
   imgUploaderWrap:{
     flex:1,
@@ -131,7 +130,7 @@ const landscapeStyles = StyleSheet.create({
   },
   imgFooter:{
     height:hp("6%"),
-    width: wp("85%"),
+    width: wp("100%"),
     flexDirection:'row',
   },
 })
