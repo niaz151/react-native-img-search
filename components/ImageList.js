@@ -39,7 +39,14 @@ function ImageList(){
   }
 
   if(screen_orientation === 'PORTRAIT'){
+
+    // ADJUST HEADER HEIGHT
+    navigation.setOptions({
+      headerStyle:{height:hp("10%"), backgroundColor: '#7BABED'}
+    })
+
     return(
+      // FLAT LIST WITH 2 COLUMNS, 5 IMAGES PER COLUMN
       <FlatList
         showsVerticalScrollIndicator={false}
         numColumns={2}
@@ -58,7 +65,14 @@ function ImageList(){
     )
   }
   else{
+
+    // ADJUST HEADER HEIGHT
+    navigation.setOptions({
+      headerStyle:{height:hp("6%"), backgroundColor: '#7BABED'}
+    })
+
     return(
+      // FLAT LIST WITH 5 COLUMNS, 2 IMAGES PER COLUMN
       <FlatList
         showsVerticalScrollIndicator={false}
         numColumns={5}
@@ -80,7 +94,6 @@ function ImageList(){
 
 const styles = StyleSheet.create({ 
   listStyles:{
-   borderColor:'black',
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'space-between',
@@ -96,8 +109,6 @@ const styles = StyleSheet.create({
 
 const landscapeStyles = StyleSheet.create({
   listStyles:{
-    borderWidth: 1,
-    borderColor:'black',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -3,25 +3,38 @@ import {View, Text, Image, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Icon} from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {useNavigation} from '@react-navigation/native';
 
-function ImagePage({navigation}){
+function ImagePage(){
 
   const screen_orientation = useSelector(state => state['screen_orientation']);
-  
+  const navigation = useNavigation();
+
   // EXTRACT ALL RELEVANT IMG DATA FROM STURE
   const single_img_data = useSelector(state => state['image_data']['single_image'][0]);
   const img_url = single_img_data['largeImageURL'];
-  const img_likes = single_img_data['likes'];
   const img_tags = single_img_data['tags'];
-  const img_downloads = single_img_data['downloads'];
   const img_uploader = single_img_data['user'];
   const img_res_height = single_img_data['imageHeight'];
   const img_res_width = single_img_data['imageWidth'];
 
 
-  // CHOOSE STYLESHEET BASED ON ORIENTATION
+  // CHOOSE STYLESHEET AND HEADER BASED ON ORIENTATION
   function getStyleType(){
-    return screen_orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
+    if (screen_orientation === 'PORTRAIT'){
+      // ADJUST HEADER HEIGHT
+      navigation.setOptions({
+        headerStyle:{height:hp("10%"), backgroundColor: '#7BABED'}
+      });
+      return portraitStyles;
+    }
+    else{
+      // ADJUST HEADER HEIGHT
+      navigation.setOptions({
+        headerStyle:{height:hp("6%"), backgroundColor: '#7BABED'}
+      });
+      return landscapeStyles;
+    }
   }
 
   return(
@@ -134,7 +147,5 @@ const landscapeStyles = StyleSheet.create({
     flexDirection:'row',
   },
 })
-
-
 
 export default ImagePage;

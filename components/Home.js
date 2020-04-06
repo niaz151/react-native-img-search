@@ -9,7 +9,6 @@ function Home(){
 
   // REDUX HOOKS
   const search_query = useSelector(state => state['search_query']);
-  const all_images = useSelector(state => state['image_data']['all_images']);
   const screen_orientation = useSelector(state => state['screen_orientation']);
   const dispatch = useDispatch();
 
@@ -30,27 +29,27 @@ function Home(){
       payload:'LANDSCAPE'
     })
 
-    // ADD LISTENER FOR ORIENTATION CHANGE
-    Dimensions.addEventListener('change', () => {
-      let dimensions = Dimensions.get('screen')
-      if(dimensions.height > dimensions.width){
-        dispatch({
-          type:'UPDATE_SCREEN_ORIENTATION',
-          payload:'PORTRAIT'
-        })
-      }
-      else{
-        dispatch({
-          type:'UPDATE_SCREEN_ORIENTATION',
-          payload:'LANDSCAPE'
-        })
-      }
-    })
-  
-    // CHOOSE STYLESHEET BASED ON ORIENTATION
-    function getStyleType(){
-      return screen_orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
+  // ADD LISTENER FOR ORIENTATION CHANGE
+  Dimensions.addEventListener('change', () => {
+    let dimensions = Dimensions.get('screen')
+    if(dimensions.height > dimensions.width){
+      dispatch({
+        type:'UPDATE_SCREEN_ORIENTATION',
+        payload:'PORTRAIT'
+      })
     }
+    else{
+      dispatch({
+        type:'UPDATE_SCREEN_ORIENTATION',
+        payload:'LANDSCAPE'
+      })
+    }
+  })
+
+  // CHOOSE STYLESHEET BASED ON ORIENTATION
+  function getStyleType(){
+    return screen_orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
+  }
 
   function handleSearchQuery(text){
 
@@ -103,7 +102,7 @@ function Home(){
     </View>
   ) 
 }
- 
+
 const portraitStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -114,8 +113,6 @@ const portraitStyles = StyleSheet.create({
   },
   listContainer:{
     width:wp("90%"),
-    borderColor:'black',
-    borderWidth: 1
   },
   searchBar: {
     width: wp("80%"),
