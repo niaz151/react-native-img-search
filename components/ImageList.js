@@ -41,20 +41,7 @@ function ImageList(){
  
   // CHOOSE STYLESHEET BASED ON ORIENTATION
   function getStyleType(){
-    if(screen_orientation === 'PORTRAIT'){
-      // ADJUST HEADER HEIGHT
-      navigation.setOptions({
-        headerStyle:{height:hp("11%"), backgroundColor: '#7BABED'}
-      });
-      return 'PORTRAIT';
-    }
-    else{
-      // ADJUST HEADER HEIGHT
-      navigation.setOptions({
-        headerStyle:{height:hp("6%"), backgroundColor: '#7BABED'}
-      });
-      return 'LANDSCAPE';
-    }
+    return (screen_orientation === 'PORTRAIT') ? 'PORTRAIT':'LANDSCAPE';
   }
 
   return(
@@ -62,12 +49,12 @@ function ImageList(){
       showsVerticalScrollIndicator={false}
       numColumns={flatListStyles[getStyleType()].num_columns}
       horizontal={false}
-      contentContainerStyle={styles.listStyles}
+      contentContainerStyle={commonStyles.listStyles}
       data = {images}
       renderItem = { image =>  
         <TouchableOpacity onPress={() => handleImgListClick(image['item']['id'])} >
           <Image 
-            style={styles.imgStyles} 
+            style={commonStyles.imgStyles} 
             source={{uri:`${image['item']['url']}`}} 
           />
         </TouchableOpacity>} 
@@ -86,34 +73,20 @@ const flatListStyles = {
   }
 }
 
-const styles = StyleSheet.create({ 
+const commonStyles = StyleSheet.create({
   listStyles:{
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'space-between',
-   paddingBottom: hp("10%"),
-   marginTop:hp("1%")
-  },  
-  imgStyles: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: hp("10%"),
+    marginTop:hp("1%")
+   },  
+   imgStyles: {
     width: wp("32%"),
     height: hp("11%"),
     margin: wp("5%")
   }
 })
 
-const landscapeStyles = StyleSheet.create({
-  listStyles:{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingBottom: hp("10%"),
-    marginTop:hp("1%"),
-   },  
-   imgStyles: {
-     width: wp("30%"),
-     height: hp("10%"),
-     margin: wp("5%"),
-   }
-})
 
 export default ImageList;

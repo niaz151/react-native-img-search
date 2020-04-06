@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, StyleSheet, Dimensions, Platform} from 'react-native';
+import {View, StyleSheet, Dimensions, Platform, ImageStore} from 'react-native';
 import {SearchBar} from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {useSelector, useDispatch} from 'react-redux';
 import ImageList from './ImageList';
+import {useNavigation} from '@react-navigation/native';
 
 function Home(){
 
@@ -11,6 +12,9 @@ function Home(){
   const search_query = useSelector(state => state['search_query']);
   const screen_orientation = useSelector(state => state['screen_orientation']);
   const dispatch = useDispatch();
+
+  // NAVIGATION HOOKS
+  const navigation = useNavigation();
 
   // API INFO
   const URL = 'https://pixabay.com/api/';
@@ -46,14 +50,22 @@ function Home(){
     }
   })
 
-  // CHOOSE STYLESHEET BASED ON ORIENTATION
+  // CHOOSE STYLESHEET AND HEADER STYLER BASED ON ORIENTATION
   function getStyleType(){
-    return screen_orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
-  }
-
-  // IF EMPTY QUERY, DO NOT SHOW THE DEFAULT API REQUEST IMAGES
-  function isQueryEmpty(){
-    return (search_query === '') ? null : <ImageList/>
+    if(screen_orientation === 'PORTRAIT'){
+      // ADJUST HEADER HEIGHT
+      navigation.setOptions({
+        headerStyle:{height:hp("11%"), backgroundColor: '#7BABED'}
+      });
+      return portraitStyles;
+    }
+    else{
+      // ADJUST HEADER HEIGHT
+      navigation.setOptions({
+        headerStyle:{height:hp("6%"), backgroundColor: '#7BABED'}
+      });
+      return landscapeStyles;
+    }
   }
 
   function handleSearchQuery(text){
@@ -93,22 +105,22 @@ function Home(){
   }
 
   return(
-    <View style={getStyleType().container} >
+    <View style={commonStyles.container} >
       <SearchBar
         containerStyle={getStyleType().searchBar}
-        inputContainerStyle={getStyleType().searchBarInput}
+        inputContainerStyle={commonStyles.searchBarInput}
         placeholder={'Search'}
         onChangeText={ (text) => handleSearchQuery(text)}
         value={search_query}
       />
       <View style={getStyleType().listContainer}>
-        {isQueryEmpty()}
+        <ImageList/>
       </View>
     </View>
   ) 
 }
 
-const portraitStyles = StyleSheet.create({
+const commonStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -116,6 +128,14 @@ const portraitStyles = StyleSheet.create({
     paddingTop: hp("2%"),
     backgroundColor:'#CED6E3'
   },
+  searchBarInput:{
+    height: 30,
+    backgroundColor:'white',
+    marginTop:-2,
+  }, 
+})
+
+const portraitStyles = StyleSheet.create({
   listContainer:{
     width:wp("90%"),
   },
@@ -126,25 +146,13 @@ const portraitStyles = StyleSheet.create({
     borderRadius: 18,
     borderBottomColor:'transparent',
     borderTopColor:'transparent'
-  },
-  searchBarInput:{
-    height: 30,
-    backgroundColor:'white',
-    marginTop:-2,
   }, 
 })
 
 const landscapeStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    paddingTop: hp("2%"),
-    backgroundColor:'#CED6E3',
-  },
   listContainer:{
     width:wp("200%"),
-    marginRight:wp("5%")
+    marginRight:wp("4%")
   },
   searchBar: {
     width: wp("150%"),
@@ -154,11 +162,6 @@ const landscapeStyles = StyleSheet.create({
     borderBottomColor:'transparent',
     borderTopColor:'transparent'
   },
-  searchBarInput:{
-    height: 30,
-    backgroundColor:'white',
-    marginTop:-2,
-  }, 
 })
 
 export default Home;
