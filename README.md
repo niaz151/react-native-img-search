@@ -10,11 +10,11 @@
 
 4. Install Expo on your mobile device via App Store or Play Store
 
-5. Use your mobile device camera to scan the QR code that pops up in your browser or terminal which in turn should open the Expo app with a running copy of the application
+5. Use your mobile device camera to scan the QR code that pops up in your browser or terminal which in turn should open the Expo app with a running copy of this application
 
 ## Features ##
 
-- Many implementaations of React Hooks (Redux, React-Navigation) that lead to cleaner code and codeblocks separated by logic instead of lifecycle
+- Many implementations of React Hooks (Redux, React-Navigation) that lead to cleaner code and codeblocks separated by logic instead of lifecycle
 
 - Image data is stored in such a way that displaying further data (ex: # of likes, # of downloads) is easily achievable
 
@@ -22,7 +22,7 @@
 
 ## Notes ##
 
-- I would have used Snack.io to host this sample, however, the 'react-native-elements' package is not compatible with package versions on Snack.io
+- I would have used Snack.io to host this sample, however, the 'react-native-elements' package is not compatible with default package versions on Snack.io
 
-- It is best practice to hide the API_KEY in an .env file but for the purposes of this project and its functionality I decided not to do so
+- It is best practice to hide the API_KEY in an .env file but , for the purposes of this project and its functionality, I decided not to do so
 
