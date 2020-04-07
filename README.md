@@ -12,5 +12,13 @@
 
 5. Use your mobile device camera to scan the QR code that pops up in your browser or terminal which in turn should open the Expo app with    a running copy of the application
 
+## Features ##
+
+- Many uses of React Hooks, allowing for a much cleaner codebase , and codeblocks separated by logic instead of lifecycle
+
+- Searchabr results appear in real-time as the user types
+
 ## Notes ##
+
+- I would have used Snack.io to host this sample, however, the 'react-native-elements' package is not compatible with package versions on   Snack.io
 
