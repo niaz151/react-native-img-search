@@ -14,11 +14,11 @@
 
 ## Features ##
 
-- Many uses of React Hooks, allowing for a much cleaner codebase , and codeblocks separated by logic instead of lifecycle
+- Many implementaations of React Hooks (Redux, React-Navigation) that lead to cleaner code and codeblocks separated by logic instead of lifecycle
+
+- Image data is stored in such a way that displaying further data (ex: # of likes, # of downloads) is easily achievable
 
 - Searchbar results appear in real-time as the user types
-
-- Image data in stored in such a way that displaying further data such as number of likes or number of downloads is easily configurable
 
 ## Notes ##
 
