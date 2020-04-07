@@ -2,7 +2,7 @@
 
 ## Installation ##
 
-1. Clone this repo by running ```https://github.com/niaz151/react-native-img-search.git``` within your terminal 
+1. Clone this repo by running ```git clone https://github.com/niaz151/react-native-img-search.git``` within your terminal 
 
 2. Navigate to the project directory and run ```yarn install```
 
