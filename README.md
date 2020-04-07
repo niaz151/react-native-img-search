@@ -14,6 +14,10 @@
 
 6. Use your mobile device camera to scan the QR code that pops up in your browser or terminal which in turn should open the Expo app with a running copy of this application
 
+    Android: Open the Expo App and choose the 'Scan QR Code Option'
+
+    iOS: Open the Camera app and just focus on the QR Code, should prompt you to open Expo
+
 ## Features ##
 
 - Many implementations of React Hooks (Redux, React-Navigation) that lead to cleaner code and codeblocks separated by logic instead of lifecycle
