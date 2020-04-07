@@ -22,9 +22,10 @@
 
 - Searchbar results appear in real-time as the user types
 
+- App styling to responsive across various screen sizes (although optimized for Iphone X)
+
 ## Notes ##
 
-- I would have used Snack.io to host this sample, however, the 'react-native-elements' package is not compatible with default package versions on Snack.io
+- I would have used Snack.io to host this sample, however, the 'react-native-elements' package is not compatible with default package versions on Snack.io, and there persists an RNC View Error
 
 - It is best practice to hide the API_KEY in an .env file but , for the purposes of this project and its functionality, I decided not to do so
-
