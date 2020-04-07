@@ -4,7 +4,7 @@
 
 1. Clone this repo by running ```git clone https://github.com/niaz151/react-native-img-search.git``` within your terminal 
 
-2. Navigate to the project directory and run ```yarn install```
+2. Navigate to the project directory and run ```yarn install``` and if yarn is needed as a prerequisite install yarn
 
 3. Run the ```yarn start``` command while still in the project directory
 
