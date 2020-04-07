@@ -75,14 +75,13 @@ const flatListStyles = {
 
 const commonStyles = StyleSheet.create({
   listStyles:{
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingBottom: hp("10%"),
     marginTop:hp("1%")
    },  
    imgStyles: {
-    width: wp("32%"),
+    width: wp("25%"),
     height: hp("11%"),
     margin: wp("5%")
   }

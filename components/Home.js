@@ -61,7 +61,7 @@ function Home(){
     else{
       // ADJUST HEADER HEIGHT
       navigation.setOptions({
-        headerStyle:{height:hp("6%"), backgroundColor: '#7BABED'}
+        headerStyle:{height:hp("7%"), backgroundColor: '#7BABED'}
       });
       return landscapeStyles;
     }
