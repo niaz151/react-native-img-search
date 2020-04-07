@@ -10,7 +10,9 @@
 
 4. Install Expo on your mobile device via App Store or Play Store
 
-5. Use your mobile device camera to scan the QR code that pops up in your browser or terminal which in turn should open the Expo app with a running copy of this application
+5. Make sure you're connected to the same Internet network as your computer
+
+6. Use your mobile device camera to scan the QR code that pops up in your browser or terminal which in turn should open the Expo app with a running copy of this application
 
 ## Features ##
 
